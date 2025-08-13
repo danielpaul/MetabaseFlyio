@@ -1,5 +1,5 @@
 # Replace this with your app's name
-app = "my-metabase"
+app = "metabaseflyio"
 primary_region = "lhr"
 
 kill_signal = "SIGTERM"
