@@ -1,0 +1,35 @@
+# Replace this with your app's name
+app = "my-metabase"
+
+kill_signal = "SIGTERM"
+kill_timeout = 5
+
+[build]
+# You might want to pin this version to a specific
+# tag in order to avoid surprising updates.
+image = "metabase/metabase:latest"
+
+[http_service]
+internal_port = 3000
+force_https = true
+# This configuration scales Metabase down to 0 when
+# it's not being used. It's a good money saver, but
+# does lead to cold start lag, so if you need your
+# Metabase to be snappy, or if you use its ability to
+# generate reports on a schedule, change min_machines_running
+# accordingly.
+auto_start_machines = true
+auto_stop_machines = true
+min_machines_running = 0
+
+[http_service.concurrency]
+type = "requests"
+hard_limit = 150
+soft_limit = 100
+
+[[http_service.checks]]
+grace_period = "120s"
+interval = "30s"
+method = "GET"
+timeout = "5s"
+path = "/api/health"
