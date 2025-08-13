@@ -14,6 +14,8 @@ image = "metabase/metabase:latest"
 # Ensure Jetty binds to all interfaces and expected port
 MB_JETTY_HOST = "0.0.0.0"
 MB_JETTY_PORT = "3000"
+# Keep the JVM heap comfortably below the VM memory
+JAVA_TOOL_OPTIONS = "-XX:+ExitOnOutOfMemoryError -Xms512m -Xmx1500m"
 # If you're using Postgres, set this (examples):
 # MB_DB_CONNECTION_URI = "postgres://USER:PASSWORD@HOST:5432/DBNAME"
 
@@ -41,3 +43,8 @@ interval = "30s"
 method = "GET"
 timeout = "5s"
 path = "/api/health"
+
+[vm]
+cpu_kind = "shared"
+cpus = 1
+memory_mb = 4096   # 4GB
